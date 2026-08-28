@@ -10,42 +10,41 @@ Following the initial TBLASTN search, downstream sequence extraction and compara
 All computational analyses were performed on a Linux-based high-performance computing cluster (HPCC) using command-line tools. NCBI BLAST+ was used to construct the nucleotide BLAST database and perform TBLASTN searches, while custom Python scripts were used to process BLAST results, calculate query coverage, select the best-supported effector hit for each sample, and extract the corresponding nucleotide and translated amino-acid sequences.
 
 ## Workflow overview
-``text
+
 Candidate effector proteins              +          Sample-specific CLso consensus sequences
 (effectors_query.fasta)                                (all_consensus_genomes.fna)
-                                |
-                                v
-
+                              |
+                              v
                 Local nucleotide BLAST database
                         (makeblastdb)
-        |
-        v
-TBLASTN search
-        |
-        v
-All significant candidate-effector hits
-(effector_tblastn_hits.tsv)
-        |
-        v
-Selection of 10 focal psyllid samples
-        |
-        v
-Best TBLASTN hit for each effector × sample
-        |
-        +--> amino-acid percent identity
-        +--> query coverage
-        +--> bit score and E-value
-        +--> genomic coordinates
-        +--> strand orientation
-        |
-        v
-Extraction of corresponding nucleotide sequences
-        |
-        v
-Effector-specific nucleotide and amino-acid FASTA files
-        |
-        v
-Multiple-sequence alignment and comparative analysis
+                              |
+                              v
+                      TBLASTN search
+                              |
+                              v
+                      All significant candidate-effector hits
+                      (effector_tblastn_hits.tsv)
+                              |
+                              v
+                      Selection of 10 focal psyllid samples
+                              |
+                              v
+                      Best TBLASTN hit for each effector × sample
+                              |
+                              +--> amino-acid percent identity
+                              +--> query coverage
+                              +--> bit score and E-value
+                              +--> genomic coordinates
+                              +--> strand orientation
+                              |
+                              v
+                      Extraction of corresponding nucleotide sequences
+                              |
+                              v
+                      Effector-specific nucleotide and amino-acid FASTA files
+                              |
+                              v
+                      Multiple-sequence alignment and comparative analysis
 Inputs
 1. Candidate effector proteins: effectors_query.fasta (This FASTA file was used as the protein query input for TBLASTN.)
 
