@@ -1,10 +1,10 @@
 # CLso candidate effector recovery by TBLASTN
 
-This repository documents a reproducible workflow for identifying and extracting candidate effector-associated sequences from sample-specific *Candidatus Liberibacter solanacearum* (CLso) consensus genomes.
+This repository documents a workflow for identifying and extracting candidate effector-associated sequences from sample-specific *Candidatus Liberibacter solanacearum* (CLso) consensus genomes.
 
 ## Overview
 
-Candidate effector amino-acid sequences are searched against sample-specific consensus nucleotide sequences using TBLASTN.
+Candidate effector amino-acid sequences are searched against 10 psyllid (3 different loaction types) sample-specific consensus nucleotide sequences using TBLASTN.
 
 ```text
 candidate effector proteins
