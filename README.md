@@ -49,7 +49,6 @@ The Python extraction script uses only the standard library.
 
 ### Candidate effector proteins
 
-Example:
 
 ```text
 effectors_query.fasta
@@ -71,12 +70,21 @@ Subject identifiers should begin with the sample identifier in the metadata tabl
 
 ### Sample metadata
 
-A tab-separated file with:
+File: sample_metadata.tsv
 
 ```text
-sample	isolate	group
-A_S1	CSU9	CLsoG
-B_S2	CSU14	CLsoG
+File_name 	Sample_Name	Clso_Haplotype	Psyllid_Haplotype
+A_S1	CSU9	CLsoG	Northwestern
+B_S2	CSU14	CLsoG	Northwestern
+G_S7	EOR13a	CLsoSumb2	Northwestern
+H_S8	EOR18	CLsoSumb2	Northwestern
+L_S12	DFS3	CLsoA	Western
+M_S13	DFS10	CLsoA	Western
+O_S15	JTL7	Southwestern	Southwestern
+P_S16	JTL8	Southwestern	Southwestern
+R_S18	ELL2	CLsoF	Northwestern
+S_S19	ELL4	CLsoF	Northwestern
+
 ```
 
 An example is provided as `sample_metadata.example.tsv`.
