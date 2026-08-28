@@ -49,27 +49,13 @@ Effector-specific nucleotide and amino-acid FASTA files
         v
 Multiple-sequence alignment and comparative analysis
 Inputs
-1. Candidate effector proteins
+1. Candidate effector proteins: effectors_query.fasta (This FASTA file was used as the protein query input for TBLASTN.)
 
-Candidate effector amino-acid sequences:
-
-effectors_query.fasta
-
-This FASTA file was used as the protein query input for TBLASTN.
-
-2. Sample-specific consensus genomes
-
-Sample-specific CLso consensus nucleotide sequences were combined into:
-
-all_consensus_genomes.fna
-
-These nucleotide sequences were used to construct the local BLAST database.
+2. Sample-specific CLso consensus genomes: all_consensus_genomes.fna (These nucleotide sequences were used to construct the local BLAST database.)
 
 The consensus sequences were not translated before the analysis. Translation of the nucleotide database was performed internally by TBLASTN in all six reading frames.
 
-3. Sample metadata
-
-Downstream analyses focused on the following 10 samples:
+3. Sample metadata: sample_metadata.tsv
 
 File_name   Sample_Name   CLso_Haplotype   Psyllid_Haplotype
 A_S1        CSU9          CLsoG            Northwestern
@@ -85,6 +71,7 @@ S_S19       ELL4          CLsoF            Northwestern
 
 The metadata distinguish the CLso group detected in each sample from the psyllid haplotype/geographic group.
 
+##Workflow
 1. Build the nucleotide BLAST database
 
 A local nucleotide database was generated from the combined sample consensus sequences using NCBI BLAST+:
@@ -95,10 +82,8 @@ makeblastdb \
   -out all_consensus_db
 
 This generated the BLAST database files beginning with:
-
 all_consensus_db.*
 2. Run TBLASTN
-
 Candidate effector proteins were searched against the nucleotide database using:
 
 tblastn \
@@ -132,8 +117,7 @@ For each candidate effector × sample combination, the best-supported TBLASTN hi
 
 Query coverage was calculated as:
 
-query coverage (%) =
-aligned query length / total query protein length × 100
+query coverage (%) = aligned query length / total query protein length × 100
 
 The genomic coordinates reported by TBLASTN were then used to extract the corresponding nucleotide sequence from the appropriate sample consensus genome.
 
@@ -141,11 +125,11 @@ For negative-strand hits, the extracted nucleotide sequence was reverse compleme
 
 Python scripts were used to automate hit selection, calculation of query coverage, sequence extraction, strand correction, and generation of summary tables and FASTA files.
 
-Outputs
+##Outputs:
 
 The final 10-sample analysis is stored under:
 
-REPORT_10samples/effectors/
+Output/effectors/
 
 Major outputs include:
 
