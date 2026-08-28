@@ -24,7 +24,7 @@ best hit per effector x sample
         +--> translated TBLASTN hit sequence
 ```
 
-TBLASTN is appropriate because the query sequences are proteins and the target database contains nucleotide sequences. TBLASTN translates the nucleotide database in all six reading frames during the search.
+We used TBLASTN  because the query sequences are proteins and the target database contains nucleotide sequences. TBLASTN translates the nucleotide database in all six reading frames during the search.
 
 ## Repository structure
 
@@ -36,7 +36,7 @@ clso-effector-tblastn/
 └── .gitignore
 ```
 
-Raw sequencing data, consensus genomes, BLAST databases, and project-specific results are intentionally not included.
+Raw sequencing data are available in BioProject: PRJNA1399511
 
 ## Requirements
 
