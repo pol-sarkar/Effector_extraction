@@ -9,7 +9,7 @@ Following the initial TBLASTN search, downstream sequence extraction and compara
 
 All computational analyses were performed on a Linux-based high-performance computing cluster (HPCC) using command-line tools. NCBI BLAST+ was used to construct the nucleotide BLAST database and perform TBLASTN searches, while custom Python scripts were used to process BLAST results, calculate query coverage, select the best-supported effector hit for each sample, and extract the corresponding nucleotide and translated amino-acid sequences.
 
-Workflow
+## Workflow overview
 Candidate effector proteins
 (effectors_query.fasta)
         |
@@ -71,7 +71,7 @@ S_S19       ELL4          CLsoF            Northwestern
 
 The metadata distinguish the CLso group detected in each sample from the psyllid haplotype/geographic group.
 
-##Workflow
+## Workflow
 1. Build the nucleotide BLAST database
 
 A local nucleotide database was generated from the combined sample consensus sequences using NCBI BLAST+:
@@ -125,7 +125,7 @@ For negative-strand hits, the extracted nucleotide sequence was reverse compleme
 
 Python scripts were used to automate hit selection, calculation of query coverage, sequence extraction, strand correction, and generation of summary tables and FASTA files.
 
-##Outputs:
+## Outputs:
 
 The final 10-sample analysis is stored under:
 
@@ -161,22 +161,12 @@ by_effector_aa/
 
 Contains a separate amino-acid FASTA file for each candidate effector. These files can be used individually for multiple-sequence alignment and comparative protein analysis.
 
-Interpretation
+## Interpretation
 
-TBLASTN amino-acid identity and query coverage should be evaluated together.
+TBLASTN amino-acid identity (pident) and query coverage (qcov) was evaluated together. ( i.e. if pident = 100%, qcov   = 100%, the translated genomic region is identical to the reference effector protein across the complete query sequence. In contrast: pident = 95%, qcov   = 35% indicates high similarity across only a portion of the reference protein and should therefore be interpreted as a partial homologous match, rather than evidence for a complete effector protein.)
 
-For example:
+The amino-acid sequences recovered directly from TBLASTN represent the translated regions covered by individual BLAST alignments. Consequently, partial TBLASTN hits may not represent complete predicted proteins, and candidate genes of particular biological interest has to be further evaluated for complete coding sequence and open-reading-frame integrity.
 
-pident = 100%
-qcov   = 100%
+## Output Data availability
+https://drive.google.com/drive/folders/1FImwGDpTj1xvamab_ksXMS5gbJk7cWQh
 
-indicates that the translated genomic region is identical to the reference effector protein across the complete query sequence.
-
-In contrast:
-
-pident = 95%
-qcov   = 35%
-
-indicates high similarity across only a portion of the reference protein and should therefore be interpreted as a partial homologous match, rather than evidence for a complete effector protein.
-
-The amino-acid sequences recovered directly from TBLASTN represent the translated regions covered by individual BLAST alignments. Consequently, partial TBLASTN hits may not represent complete predicted proteins, and candidate genes of particular biological interest should be further evaluated for complete coding sequence and open-reading-frame integrity.s
