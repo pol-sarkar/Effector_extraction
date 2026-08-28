@@ -1,30 +1,43 @@
 # CLso candidate effector recovery by TBLASTN
 
 This repository documents a workflow for identifying and extracting candidate effector-associated sequences from sample-specific *Candidatus Liberibacter solanacearum* (CLso) consensus genomes.
-
+Raw Illumina sequencing data used in this study are available through NCBI under BioProject PRJNA1399511.
 ## Overview
 
-Candidate effector amino-acid sequences are searched against 10 psyllid (3 different loaction types) sample-specific consensus nucleotide sequences using TBLASTN.
+Candidate effector amino-acid sequences were searched against sample-specific consensus nucleotide sequences from 10 psyllid samples representing three geographic regions (Northwestern, Western, and Southwestern) using TBLASTN.
+
+All computational analyses were performed on a Linux-based high-performance computing cluster (HPCC) using command-line tools. NCBI BLAST+ was used to construct the nucleotide BLAST database and perform TBLASTN searches, while custom Python scripts were used to process BLAST results, calculate query coverage, select the best-supported effector hit for each sample, and extract the corresponding nucleotide and translated amino-acid sequences.
 
 ```text
-candidate effector proteins
-        |
-        v
-     TBLASTN
-        |
-        v
-sample-specific consensus genomes
-        |
-        v
-best hit per effector x sample
-        |
-        +--> amino-acid identity and query coverage
-        +--> genomic coordinates and strand
-        +--> extracted nucleotide sequence
-        +--> translated TBLASTN hit sequence
-```
+The workflow was:
 
-We used TBLASTN  because the query sequences are proteins and the target database contains nucleotide sequences. TBLASTN translates the nucleotide database in all six reading frames during the search.
+Candidate effector proteins
+        |
+        v
+Sample-specific CLso consensus genomes
+        |
+        v
+Build local nucleotide BLAST database
+        |
+        v
+TBLASTN protein-to-nucleotide search
+        |
+        v
+Best hit for each effector × sample
+        |
+        +--> amino-acid percent identity (pident)
+        +--> query coverage (qcov)
+        +--> genomic coordinates and strand
+        +--> nucleotide sequence extraction
+        +--> translated amino-acid hit sequence
+        |
+        v
+Effector-specific FASTA files
+        |
+        v
+Multiple-sequence alignment and comparative analysis
+
+TBLASTN was used because the query sequences are proteins and the target database contains nucleotide sequences. TBLASTN translates the nucleotide database in all six reading frames during the search.
 
 ## Repository structure
 
@@ -36,7 +49,7 @@ clso-effector-tblastn/
 └── .gitignore
 ```
 
-Raw sequencing data are available in BioProject: PRJNA1399511
+MEGA — downstream visualization and multiple-sequence alignment of selected effector sequences
 
 ## Requirements
 
