@@ -1,3 +1,28 @@
+Workflow
+Candidate effector proteins
+        ↓
+TBLASTN against CLso-ZC1
+(NC_014774.1)
+        ↓
+Identify approximate genomic locus
+        ↓
+Original trimmed Illumina reads
+        ↓
+Map each sample to the complete ZC1 genome
+        ↓
+Calculate nucleotide-by-nucleotide coverage
+        ↓
+Call sample-specific variants
+        ↓
+Mask insufficiently supported positions as N
+        ↓
+Extract read-supported effector nucleotide sequence
+        ↓
+Translate sufficiently complete sequences
+        ↓
+Protein alignment / sequence identity / phylogeny
+
+
 # CLso candidate effector recovery by TBLASTN
 
 This repository documents a workflow for identifying and extracting candidate effector-associated sequences from sample-specific *Candidatus Liberibacter solanacearum* (CLso) consensus genomes.
@@ -9,43 +34,7 @@ Following the initial TBLASTN search, downstream sequence extraction and compara
 
 All computational analyses were performed on a Linux-based high-performance computing cluster (HPCC) using command-line tools. NCBI BLAST+ was used to construct the nucleotide BLAST database and perform TBLASTN searches, while custom Python scripts were used to process BLAST results, calculate query coverage, select the best-supported effector hit for each sample, and extract the corresponding nucleotide and translated amino-acid sequences.
 
-``text
-
-Candidate effector proteins              +          Sample-specific CLso consensus sequences
-(effectors_query.fasta)                                (all_consensus_genomes.fna)
-                              |
-                              v
-                Local nucleotide BLAST database
-                        (makeblastdb)
-                              |
-                              v
-                      TBLASTN search
-                              |
-                              v
-                      All significant candidate-effector hits
-                      (effector_tblastn_hits.tsv)
-                              |
-                              v
-                      Selection of 10 focal psyllid samples
-                              |
-                              v
-                      Best TBLASTN hit for each effector × sample
-                              |
-                              +--> amino-acid percent identity
-                              +--> query coverage
-                              +--> bit score and E-value
-                              +--> genomic coordinates
-                              +--> strand orientation
-                              |
-                              v
-                      Extraction of corresponding nucleotide sequences
-                              |
-                              v
-                      Effector-specific nucleotide and amino-acid FASTA files
-                              |
-                              v
-                      Multiple-sequence alignment and comparative analysis
-Inputs
+## Inputs
 1. Candidate effector proteins: effectors_query.fasta (This FASTA file was used as the protein query input for TBLASTN.)
 
 2. Sample-specific CLso consensus genomes: all_consensus_genomes.fna (These nucleotide sequences were used to construct the local BLAST database.)
